@@ -23,7 +23,7 @@ namespace Game
             CenterToScreen();
             map = new MapSystem(this);
         }
-
+        //Прогрузка объектов и сущностей при созданит сцены
         private void GameForm_Load(object sender, EventArgs e)
         {
             map.Generate();
