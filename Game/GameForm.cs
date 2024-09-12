@@ -52,7 +52,7 @@ namespace Game
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            player.Position(directionVector);
+            player.PlusPosition(directionVector);
             i++;
             if(i == 200)
             {
