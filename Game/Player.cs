@@ -20,7 +20,7 @@ namespace Game
             Spawn();
         }
 
-        public void Position(Point _position)
+        public void PlusPosition(Point _position)
         {
             player.Location = new Point(player.Location.X + _position.X, player.Location.Y + _position.Y);
         }
