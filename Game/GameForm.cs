@@ -16,7 +16,9 @@ namespace Game
         private Player player;
         private Point directionVector;
         private int seconds;
+        private int minutes;
         private int i;
+        private int playerSpeed = 5;
         public GameForm()
         {
             InitializeComponent();
@@ -28,25 +30,26 @@ namespace Game
         {
             map.Generate();
             player = new Player(this, map, 100, 1);
+            seconds = 0;
         }
 
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.W)
             {
-                directionVector.Y = -5;
+                directionVector.Y = -playerSpeed;
             }
             if (e.KeyCode == Keys.D)
             {
-                directionVector.X = 5;
+                directionVector.X = playerSpeed;
             }
             if (e.KeyCode == Keys.S)
             {
-                directionVector.Y = 5;
+                directionVector.Y = playerSpeed;
             }
             if (e.KeyCode == Keys.A)
             {
-                directionVector.X = -5;
+                directionVector.X = -playerSpeed;
             }
         }
 
@@ -54,7 +57,7 @@ namespace Game
         {
             player.PlusPosition(directionVector);
             i++;
-            if(i == 200)
+            if(i == 50)
             {
                 i = 0;
                 seconds++;
