@@ -3,12 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Game
 {
     public class Entity
     {
-        private int hp;
+        private int hp 
+        {
+            get
+            {
+                return hp;
+            }
+            set
+            {
+                if(value < 0)
+                {
+                    hp = 0;
+                    return;
+                }
+                hp = value;
+            }
+        }
         private int damage;
         public int Damage => damage;
         public int HP => hp;

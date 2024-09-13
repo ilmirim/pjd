@@ -49,19 +49,6 @@ namespace Game
                 directionVector.X = -5;
             }
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            player.PlusPosition(directionVector);
-            i++;
-            if(i == 200)
-            {
-                i = 0;
-                seconds++;
-            }
-            TextTimer.Text = $"Time: 0:{seconds}";
-        }
-
         private void GameForm_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.W)
@@ -80,6 +67,18 @@ namespace Game
             {
                 directionVector.X = 0;
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            player.PlusPosition(directionVector);
+            i++;
+            if(i == 200)
+            {
+                i = 0;
+                seconds++;
+            }
+            TextTimer.Text = $"Time: 0:{seconds}";
         }
     }
 }
