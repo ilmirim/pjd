@@ -17,20 +17,22 @@ namespace Game
             }
             set
             {
-                if(value < 0)
+                if(value > hpMax)
                 {
-                    hp = 0;
+                    hp = hpMax;
                     return;
                 }
                 hp = value;
             }
         }
         private int damage;
+        private int hpMax;
         public int Damage => damage;
         public int HP => hp;
         public Entity(int _hp = 1, int _damage = 1)
         {
             hp = _hp;
+            hpMax = _hp;
             damage = _damage;
         }
         public void TakeDamage(int _damage)
