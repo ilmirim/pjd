@@ -8,6 +8,6 @@ namespace Game
 {
     public class Enemy:Entity
     {
-
+        
     }
 }
