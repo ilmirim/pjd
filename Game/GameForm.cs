@@ -12,8 +12,7 @@ namespace Game
 {
     public partial class GameForm : Form
     {
-        private MapSystem map;
-        private Player player;
+        private GameController game;
         private Point directionVector;
         private int seconds;
         private int i;
@@ -21,13 +20,12 @@ namespace Game
         {
             InitializeComponent();
             CenterToScreen();
-            map = new MapSystem(this);
+            game = new GameController(this);
         }
         //Прогрузка объектов и сущностей при созданит сцены
         private void GameForm_Load(object sender, EventArgs e)
         {
-            map.Generate();
-            player = new Player(this, map, 100, 1);
+            game.Start();
         }
 
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
@@ -71,12 +69,14 @@ namespace Game
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            player.PlusPosition(directionVector);
+            game.MovePlayer(directionVector);
+
             i++;
-            if(i == 200)
+            if(i == 50)
             {
                 i = 0;
                 seconds++;
+                game.SpawnEnemy();
             }
             TextTimer.Text = $"Time: 0:{seconds}";
         }

@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Game
 {
     public class MapSystem
     {
-        GameForm game;
-        public MapSystem(GameForm _gameForm)
+        Form game;
+        public MapSystem()
         {
-            game = _gameForm;
+            game = Form.ActiveForm;
         }
         public void Generate()
         {

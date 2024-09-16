@@ -9,31 +9,23 @@ namespace Game
 {
     public class Entity
     {
-        private int hp 
-        {
-            get
-            {
-                return hp;
-            }
-            set
-            {
-                if(value > hpMax)
-                {
-                    hp = hpMax;
-                    return;
-                }
-                hp = value;
-            }
-        }
+        private int hp;
         private int damage;
         private int hpMax;
+        public enum EntityType
+        { 
+            player, enemy
+        }
+        private EntityType type;
+        public EntityType Type => type;
         public int Damage => damage;
         public int HP => hp;
-        public Entity(int _hp = 1, int _damage = 1)
+        public Entity(EntityType _type = EntityType.enemy, int _hp = 1, int _damage = 1)
         {
             hp = _hp;
             hpMax = _hp;
             damage = _damage;
+            type = _type;
         }
         public void TakeDamage(int _damage)
         {
