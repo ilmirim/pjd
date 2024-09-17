@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows;
 
 namespace Game
 {
@@ -14,6 +15,7 @@ namespace Game
         private Player player;
         private GameForm gameForm;
         private Dictionary<Entity, Control> entities;
+        private Random random;
 
         public GameController(GameForm _gameForm)
         {
@@ -36,14 +38,17 @@ namespace Game
 
         public void EnemyLogic()
         {
-            Point direction = new Point(0, 0);
+            PointF direction = new Point(0, 0);
             foreach (var entity in entities)
             {
                 if(entity.Key.Type == Entity.EntityType.player)
                     continue;
 
-                direction = new Point(entity.Value.Location.X - entities[player].Location.X);
-
+                var x = entity.Value.Location.X;
+                var y = entity.Value.Location.Y;
+                direction = new Point(x - entities[player].Location.X, y - entities[player].Location.Y);
+                var length = Math.Sqrt(direction.X^2 + direction.Y^2);
+                var normalizedDirection = new Point();
             }
         }
 

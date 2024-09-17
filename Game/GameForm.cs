@@ -70,6 +70,7 @@ namespace Game
         private void timer1_Tick(object sender, EventArgs e)
         {
             game.MovePlayer(directionVector);
+            game.EnemyLogic();
 
             i++;
             if(i == 50)
