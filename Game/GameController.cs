@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows;
+using System.Media;
 
 namespace Game
 {
@@ -47,7 +48,7 @@ namespace Game
                 var x = entity.Value.Location.X;
                 var y = entity.Value.Location.Y;
                 direction = new Point(x - entities[player].Location.X, y - entities[player].Location.Y);
-                var length = Math.Sqrt(direction.X^2 + direction.Y^2);
+                var length = Math.Sqrt(direction.X + direction.Y);
                 var normalizedDirection = new Point();
             }
         }
@@ -73,5 +74,6 @@ namespace Game
             gameForm.Controls.Add(_enemyPanel);
             _enemyPanel.BringToFront();
         }
+        
     }
 }

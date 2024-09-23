@@ -29,8 +29,8 @@ namespace Game
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Time: 0:23");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Time: 1:45");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Time: 0:23");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Time: 1:45");
             this.PlayButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -67,6 +67,7 @@ namespace Game
             this.button2.TabIndex = 0;
             this.button2.Text = "Settings";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -81,6 +82,7 @@ namespace Game
             this.button3.TabIndex = 0;
             this.button3.Text = "Quit";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // listView1
             // 
@@ -89,8 +91,8 @@ namespace Game
             this.listView1.ForeColor = System.Drawing.Color.Silver;
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem5,
+            listViewItem6});
             this.listView1.Location = new System.Drawing.Point(12, 129);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(111, 69);
