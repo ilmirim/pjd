@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Runtime.Remoting.Channels;
 
 namespace Game
 {
     public class Player : Entity
     {
         private Control player;
+        private int width, height;
         private Point location
         {
             get
@@ -19,13 +21,13 @@ namespace Game
             }
             set
             {
-                if (value.X > Form.ActiveForm.Width - player.Width)
+                if (value.X > width - player.Width)
                 {
-                    player.Location = new Point(Form.ActiveForm.Width - player.Width, player.Location.Y);
+                    player.Location = new Point(width - player.Width, player.Location.Y);
                 }
-                else if (value.Y > Form.ActiveForm.Height - player.Height)
+                else if (value.Y > height - player.Height)
                 {
-                    player.Location = new Point(player.Location.X, Form.ActiveForm.Height - player.Height);
+                    player.Location = new Point(player.Location.X, height - player.Height);
                 }
                 else if (value.Y < 0)
                 {
@@ -41,9 +43,11 @@ namespace Game
                 }
             }
         }
-        public Player(Control _player, EntityType _type = EntityType.player, int _hp = 1, int _damage = 1) : base(_type, _hp, _damage)
+        public Player(GameForm _gameForm, Control _player, EntityType _type = EntityType.player, int _hp = 1, int _damage = 1) : base(_type, _hp, _damage)
         {
             player = _player;
+            width = _gameForm.Width;
+            height = _gameForm.Height;
         }
 
         public void PlusPosition(Point _position)
