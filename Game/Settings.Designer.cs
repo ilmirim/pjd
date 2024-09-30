@@ -41,7 +41,6 @@
             this.MuteButton.TabIndex = 0;
             this.MuteButton.Text = "Музыка";
             this.MuteButton.UseVisualStyleBackColor = true;
-            this.MuteButton.Click += new System.EventHandler(this.MuteButton_Click);
             // 
             // Settings
             // 
