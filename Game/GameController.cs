@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows;
 using System.Media;
+using System.Diagnostics;
 
 namespace Game
 {
@@ -14,6 +15,7 @@ namespace Game
     {
         private MapSystem map;
         private Player player;
+        private GameController game;
         private Control playerControl;
         private GameForm gameForm;
         private Dictionary<Enemy, Control> entities;
@@ -34,6 +36,11 @@ namespace Game
             SpawnPlayer();
             i = 0;
         }
+        public void Stop()
+        {
+            
+        }
+
 
         public void MovePlayer(Point _direction)
         {
@@ -60,6 +67,10 @@ namespace Game
                     (y + sizeY > playerControl.Location.Y + playerControl.Height && y < playerControl.Location.Y + playerControl.Height))
                     {
                         playerControl.BackColor = Color.Black;
+
+                        DeadForm deadForm = new DeadForm();
+                        deadForm.Show();
+                        game.Stop();
                     }
                 }
             }

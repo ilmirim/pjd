@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeadForm.Designer.cs">
+      <DependentUpon>DeadForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Enemy.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityManager.cs" />
@@ -72,6 +78,9 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DeadForm.resx">
+      <DependentUpon>DeadForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
