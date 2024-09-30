@@ -21,19 +21,5 @@ namespace Game
         {
 
         }
-        
-
-        private Boolean isPlaing = true;
-        /*private void MuteButton_Click(object sender, EventArgs e)
-        {
-            if (StartUpMusic.IsLoadCompleted)
-            {
-                if (isPlaing)
-                    StartUpMusic.Stop();  
-                else
-                    StartUpMusic.Play();
-                isPlaing=false;
-            }
-        }*/
     }
 }

@@ -23,12 +23,16 @@ namespace Game
             game.Show();
             this.Hide();
         }
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
-            {
-                this.Close();
-            }
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+            settings.Show();
+            this.Hide();
         }
     }
 }
