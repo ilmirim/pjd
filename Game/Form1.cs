@@ -32,7 +32,6 @@ namespace Game
         {
             Settings settings = new Settings();
             settings.Show();
-            this.Hide();
         }
     }
 }

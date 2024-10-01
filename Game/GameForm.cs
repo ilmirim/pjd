@@ -80,7 +80,7 @@ namespace Game
                 game.SpawnEnemy();
             }
             TextTimer.Text = $"Time: 0:{seconds}";
-            label1.Text = $"Count: {seconds/2}";
+            label1.Text = $"Count: {seconds*3}";
         }
     }
 }
