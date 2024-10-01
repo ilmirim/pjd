@@ -35,7 +35,7 @@
             // 
             this.MuteButton.AutoSize = true;
             this.MuteButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.MuteButton.Location = new System.Drawing.Point(86, 89);
+            this.MuteButton.Location = new System.Drawing.Point(12, 12);
             this.MuteButton.Name = "MuteButton";
             this.MuteButton.Size = new System.Drawing.Size(66, 17);
             this.MuteButton.TabIndex = 0;
@@ -46,11 +46,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(284, 85);
             this.Controls.Add(this.MuteButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Settings";
             this.Text = "Settings";
+            this.Deactivate += new System.EventHandler(this.Settings_Deactivate);
             this.Load += new System.EventHandler(this.Settings_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Settings_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

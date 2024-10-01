@@ -72,6 +72,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaveSystem.cs" />
     <Compile Include="Settings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,12 +110,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\menu_music.ogg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\grass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\click.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SettingAplied.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

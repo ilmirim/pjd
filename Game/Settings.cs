@@ -12,14 +12,28 @@ namespace Game
 {
     public partial class Settings : Form
     {
-        public Settings()
+        Form mainForm;
+        public Settings(Form form)
         {
             InitializeComponent();
+            mainForm = form;
         }
 
         private void Settings_Load(object sender, EventArgs e)
         {
+            Focus();
+        }
 
+        private void Settings_Deactivate(object sender, EventArgs e)
+        {
+            mainForm.TopMost = true;
+            mainForm.Show();
+        }
+
+        private void Settings_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                this.Close();
         }
     }
 }
