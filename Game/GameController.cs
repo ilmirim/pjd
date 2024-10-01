@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -42,7 +43,6 @@ namespace Game
 
         public void EnemyLogic()
         {
-            PointF direction = new Point(0, 0);
             foreach (var entity in entities)
             {
                 var x = entity.Value.Location.X;
@@ -52,14 +52,19 @@ namespace Game
                 var sizeY = entity.Value.Height;
                 entity.Value.Location = new Point(x + entity.Key.GetDirection.X, y + entity.Key.GetDirection.Y);
                 if(!entity.Key.PlusTime())
+                {
                     entity.Value.Dispose();
+                    entities.Remove(entity.Key);
+                    return;
+                }
                 if ((x + sizeX > playerControl.Location.X && x < playerControl.Location.X) ||
                     (x + sizeX > playerControl.Location.X + playerControl.Width && x < playerControl.Location.X + playerControl.Width))
                 {
                     if((y + sizeY > playerControl.Location.Y && y < playerControl.Location.Y) ||
                     (y + sizeY > playerControl.Location.Y + playerControl.Height && y < playerControl.Location.Y + playerControl.Height))
                     {
-                        playerControl.BackColor = Color.Black;
+                        playerControl.BackColor = Color.Red;
+                        LoseGame();
                     }
                 }
             }
@@ -68,7 +73,10 @@ namespace Game
         private void SpawnPlayer()
         {
             
-            Panel _playerPanel = new Panel();
+            PictureBox _playerPanel = new PictureBox();
+            _playerPanel.BackColor = Color.FromArgb(27, 29, 41);
+            _playerPanel.BackgroundImage = Properties.Resources.ship2;
+            _playerPanel.BackgroundImageLayout = ImageLayout.Zoom;
             _playerPanel.Size = new Size(50, 50);
             _playerPanel.Location = new Point((1280 - _playerPanel.Width) / 2, (720 - _playerPanel.Height) / 2);
             gameForm.Controls.Add(_playerPanel);
@@ -99,5 +107,9 @@ namespace Game
             entities.Add(new Enemy(5, new Point(x == 1280 ? -random.Next(1, 5)*100/size : random.Next(1, 5) * 100 / size, y == 720 ? -random.Next(1, 5) * 100 / size : random.Next(1, 5) * 100 / size)), _enemyPanel);
         }
         
+        private void LoseGame()
+        {
+            gameForm.Dispose();
+        }
     }
 }

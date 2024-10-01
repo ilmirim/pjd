@@ -15,12 +15,14 @@ namespace Game
         private GameController game;
         private Point directionVector;
         private int seconds;
+        private Form menuForm;
         private int i;
-        public GameForm()
+        public GameForm(Form _menuForm)
         {
             InitializeComponent();
             CenterToScreen();
             game = new GameController(this);
+            menuForm = _menuForm;
         }
         //Прогрузка объектов и сущностей при созданит сцены
         private void GameForm_Load(object sender, EventArgs e)
@@ -80,6 +82,14 @@ namespace Game
                 game.SpawnEnemy();
             }
             TextTimer.Text = $"Time: 0:{seconds}";
+        }
+
+        private void GameForm_Deactivate(object sender, EventArgs e)
+        {
+            menuForm.TopMost = true;
+            SaveSystem saveSystem = new SaveSystem("pjd Project");
+            saveSystem.AddNewTry($"time 0:{seconds}");
+            menuForm.Show();
         }
     }
 }
