@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.MuteButton = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // MuteButton
@@ -42,11 +43,23 @@
             this.MuteButton.Text = "Музыка";
             this.MuteButton.UseVisualStyleBackColor = true;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBox1.Location = new System.Drawing.Point(12, 35);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(56, 17);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Звуки";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 85);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.MuteButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Settings";
@@ -62,5 +75,6 @@
         #endregion
 
         private System.Windows.Forms.CheckBox MuteButton;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

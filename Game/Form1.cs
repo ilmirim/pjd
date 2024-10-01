@@ -42,22 +42,22 @@ namespace Game
             clickSound.Play();
             Settings settings = new Settings(this);
             settings.Show();
-            this.Hide();
-        }
+            //this.Hide();
+        } 
 
         private void Form1_Activated(object sender, EventArgs e)
         {
             openSound.Play();
             Thread.Sleep(3200);
-            music.Play();
+            if(saveSystem.isActiveMusic)
+                music.Play();
             Focus();
             listView1.Clear();
             var record = 0;
             foreach (var item in saveSystem.GetAllTryes())
             {
-                listView1.Items.Add(item);
-                int minutesToSec = int.Parse(item.Split(' ')[1].Split(':')[0]) * 60;
-                int seconds = int.Parse(item.Split(':')[1]) + minutesToSec;
+                listView1.Items.Add($"time - {item} sec");
+                int seconds = int.Parse(item);
                 if (record < seconds)
                     record = seconds;
             }

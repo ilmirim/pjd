@@ -75,20 +75,21 @@ namespace Game
             game.EnemyLogic();
 
             i++;
-            if(i == 50)
+            if(i % 25 == 0)
+                game.SpawnEnemy();
+            if (i == 50)
             {
                 i = 0;
                 seconds++;
-                game.SpawnEnemy();
             }
-            TextTimer.Text = $"Time: 0:{seconds}";
+            TextTimer.Text = $"Time: {seconds}";
         }
 
         private void GameForm_Deactivate(object sender, EventArgs e)
         {
             menuForm.TopMost = true;
             SaveSystem saveSystem = new SaveSystem("pjd Project");
-            saveSystem.AddNewTry($"time 0:{seconds}");
+            saveSystem.AddNewTry(seconds.ToString());
             menuForm.Show();
         }
     }

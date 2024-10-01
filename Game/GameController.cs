@@ -74,10 +74,10 @@ namespace Game
         {
             
             PictureBox _playerPanel = new PictureBox();
-            _playerPanel.BackColor = Color.FromArgb(27, 29, 41);
+            _playerPanel.BackColor = Color.Transparent;
             _playerPanel.BackgroundImage = Properties.Resources.ship2;
             _playerPanel.BackgroundImageLayout = ImageLayout.Zoom;
-            _playerPanel.Size = new Size(50, 50);
+            _playerPanel.Size = new Size(25, 25);
             _playerPanel.Location = new Point((1280 - _playerPanel.Width) / 2, (720 - _playerPanel.Height) / 2);
             gameForm.Controls.Add(_playerPanel);
             player = new Player(gameForm, _playerPanel);

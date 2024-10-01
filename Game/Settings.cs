@@ -17,16 +17,22 @@ namespace Game
         {
             InitializeComponent();
             mainForm = form;
+            SaveSystem save = new SaveSystem();
+            MuteButton.Checked = save.isActiveMusic;
+            checkBox1.Checked = save.isActiveSound;
         }
 
         private void Settings_Load(object sender, EventArgs e)
         {
+            TopMost = true;
             Focus();
         }
 
         private void Settings_Deactivate(object sender, EventArgs e)
         {
             mainForm.TopMost = true;
+            SaveSystem save = new SaveSystem();
+            save.SaveSettings(MuteButton.Checked, checkBox1.Checked);
             mainForm.Show();
         }
 
