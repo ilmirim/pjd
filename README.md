@@ -8,3 +8,5 @@
 - [Mirim](https://github.com/ilmirim)
 - [Nikita](https://github.com/Avatar-cod)
 
+## Compositor & designer & artist
+- [Mirim](https://github.com/ilmirim)
