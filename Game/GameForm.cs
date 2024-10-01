@@ -17,6 +17,7 @@ namespace Game
         private int seconds;
         private Form menuForm;
         private int i;
+        private int min=0;
         public GameForm(Form _menuForm)
         {
             InitializeComponent();
@@ -75,14 +76,19 @@ namespace Game
             game.EnemyLogic();
 
             i++;
-            if(i == 50)
+            if (i%25==0)
+                game.SpawnEnemy();
+            if (i == 50)
             {
                 i = 0;
                 seconds++;
-                game.SpawnEnemy();
             }
-            TextTimer.Text = $"Time: 0:{seconds}";
-            label1.Text = $"Count: {seconds*3}";
+            if (seconds>59)
+            {
+                seconds = 0;
+                min += 1;
+            }
+            TextTimer.Text = $"Time: {min}:{seconds}";
         }
 
         private void GameForm_Deactivate(object sender, EventArgs e)
