@@ -75,9 +75,9 @@ namespace Game
             game.EnemyLogic();
 
             i++;
-            if(i % 25 == 0)
+            if(i % 12 == 0)
                 game.SpawnEnemy();
-            if (i == 50)
+            if (i == 25)
             {
                 i = 0;
                 seconds++;

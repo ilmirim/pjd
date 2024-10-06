@@ -26,6 +26,7 @@ namespace Game
             {
                 List<string> text = new List<string>();
                 text.Add("1");
+                text.Add("1");
                 File.WriteAllLines(pathToDirectory + localSettingsPath, text);
             }
         }

@@ -87,11 +87,16 @@ namespace Game
 
         public void SpawnEnemy()
         {
-            Panel _enemyPanel = new Panel();
+            PictureBox _enemyPanel = new PictureBox();
             int size = random.Next(25, 100);
+            if (size < 50)
+                _enemyPanel.BackgroundImage = Properties.Resources._16x16;
+            else if (size < 75)
+                _enemyPanel.BackgroundImage = Properties.Resources._32x32;
+            else
+                _enemyPanel.BackgroundImage = Properties.Resources._64x64;
             _enemyPanel.Size = new Size(size, size);
-            int x = 0;
-            int y = 0;
+            int x, y;
             if (random.Next(0, 10) > 5)
                 x = 1280;
             else
@@ -101,7 +106,8 @@ namespace Game
             else
                 y = 0;
             _enemyPanel.Location = new Point(x, y);
-            _enemyPanel.BackColor = Color.Red;
+            _enemyPanel.BackColor = Color.Transparent;
+            _enemyPanel.BackgroundImageLayout = ImageLayout.Stretch;
             gameForm.Controls.Add(_enemyPanel);
             _enemyPanel.BringToFront();
             entities.Add(new Enemy(5, new Point(x == 1280 ? -random.Next(1, 5)*100/size : random.Next(1, 5) * 100 / size, y == 720 ? -random.Next(1, 5) * 100 / size : random.Next(1, 5) * 100 / size)), _enemyPanel);
