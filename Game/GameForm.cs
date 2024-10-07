@@ -17,13 +17,18 @@ namespace Game
         private int seconds;
         private Form menuForm;
         private int i;
+
         public GameForm(Form _menuForm)
         {
             InitializeComponent();
             CenterToScreen();
+
+            this.BackColor = Color.White;
+
             game = new GameController(this);
             menuForm = _menuForm;
         }
+
         //Прогрузка объектов и сущностей при созданит сцены
         private void GameForm_Load(object sender, EventArgs e)
         {
@@ -75,9 +80,9 @@ namespace Game
             game.EnemyLogic();
 
             i++;
-            if(i % 12 == 0)
+            if(i % 25 == 0)
                 game.SpawnEnemy();
-            if (i == 25)
+            if (i == 50)
             {
                 i = 0;
                 seconds++;
@@ -91,6 +96,11 @@ namespace Game
             SaveSystem saveSystem = new SaveSystem("pjd Project");
             saveSystem.AddNewTry(seconds.ToString());
             menuForm.Show();
+        }
+
+        public void Centered()
+        {
+            CenterToScreen();
         }
     }
 }

@@ -128,16 +128,7 @@
     <None Include="Resources\SettingAplied.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\64x64.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\game back.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\16x16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

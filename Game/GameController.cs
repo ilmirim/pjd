@@ -11,6 +11,7 @@ using System.Media;
 
 namespace Game
 {
+
     internal class GameController
     {
         private MapSystem map;
@@ -34,6 +35,9 @@ namespace Game
             map.Generate();
             SpawnPlayer();
             i = 0;
+            gameForm.Width = 1280;
+            gameForm.Height = 720;
+            gameForm.Centered();
         }
 
         public void MovePlayer(Point _direction)
@@ -70,15 +74,15 @@ namespace Game
             }
         }
 
+        // Объкты (Модель) - Контроллер - Представление
         private void SpawnPlayer()
-        {
-            
-            PictureBox _playerPanel = new PictureBox();
+        {            
+            var _playerPanel = new Panel();
             _playerPanel.BackColor = Color.Transparent;
             _playerPanel.BackgroundImage = Properties.Resources.ship2;
             _playerPanel.BackgroundImageLayout = ImageLayout.Zoom;
             _playerPanel.Size = new Size(25, 25);
-            _playerPanel.Location = new Point((1280 - _playerPanel.Width) / 2, (720 - _playerPanel.Height) / 2);
+            _playerPanel.Location = new Point((gameForm.Width - _playerPanel.Width) / 2, (gameForm.Height - _playerPanel.Height) / 2);
             gameForm.Controls.Add(_playerPanel);
             player = new Player(gameForm, _playerPanel);
             _playerPanel.BringToFront();
@@ -87,30 +91,29 @@ namespace Game
 
         public void SpawnEnemy()
         {
-            PictureBox _enemyPanel = new PictureBox();
-            int size = random.Next(25, 100);
-            if (size < 50)
+            var _enemyPanel = new Panel();
+            var size = random.Next(25, 200);
+            /*if (size < 50)
                 _enemyPanel.BackgroundImage = Properties.Resources._16x16;
             else if (size < 75)
                 _enemyPanel.BackgroundImage = Properties.Resources._32x32;
             else
-                _enemyPanel.BackgroundImage = Properties.Resources._64x64;
+                _enemyPanel.BackgroundImage = Properties.Resources._64x64;*/
+            _enemyPanel.BackColor = Color.DarkBlue;
             _enemyPanel.Size = new Size(size, size);
             int x, y;
             if (random.Next(0, 10) > 5)
-                x = 1280;
+                x = gameForm.Width;
             else
                 x = 0;
             if (random.Next(0, 10) > 5)
-                y = 720;
+                y = gameForm.Height;
             else
                 y = 0;
             _enemyPanel.Location = new Point(x, y);
-            _enemyPanel.BackColor = Color.Transparent;
-            _enemyPanel.BackgroundImageLayout = ImageLayout.Stretch;
             gameForm.Controls.Add(_enemyPanel);
             _enemyPanel.BringToFront();
-            entities.Add(new Enemy(5, new Point(x == 1280 ? -random.Next(1, 5)*100/size : random.Next(1, 5) * 100 / size, y == 720 ? -random.Next(1, 5) * 100 / size : random.Next(1, 5) * 100 / size)), _enemyPanel);
+            entities.Add(new Enemy(10, new Point(x == gameForm.Width ? -random.Next(1, 5)*100/size : random.Next(1, 5) * 100 / size, y == gameForm.Height ? -random.Next(1, 5) * 100 / size : random.Next(1, 5) * 100 / size)), _enemyPanel);
         }
         
         private void LoseGame()
