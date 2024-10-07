@@ -33,38 +33,38 @@ namespace Game
 
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.W)
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
             {
                 directionVector.Y = -5;
             }
-            if (e.KeyCode == Keys.D)
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
             {
                 directionVector.X = 5;
             }
-            if (e.KeyCode == Keys.S)
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
             {
                 directionVector.Y = 5;
             }
-            if (e.KeyCode == Keys.A)
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)  
             {
                 directionVector.X = -5;
             }
         }
         private void GameForm_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.W)
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
             {
                 directionVector.Y = 0;
             }
-            if (e.KeyCode == Keys.D)
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
             {
                 directionVector.X = 0;
             }
-            if (e.KeyCode == Keys.S)
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
             {
                 directionVector.Y = 0;
             }
-            if (e.KeyCode == Keys.A)
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
             {
                 directionVector.X = 0;
             }
