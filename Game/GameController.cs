@@ -16,15 +16,16 @@ namespace Game
     {
         private MapSystem map;
         private Player player;
+        private GameVisualizer visualizer;
         private Control playerControl;
-        private GameForm gameForm;
         private Dictionary<Enemy, Control> entities;
         private Random random;
+        private int width, height;
         private int i;
 
-        public GameController(GameForm _gameForm)
+        public GameController(GameForm _gameForm, GameVisualizer _gameVisualizer)
         {
-            gameForm = _gameForm;
+            visualizer = _gameVisualizer;
             map = new MapSystem();
             entities = new Dictionary<Enemy, Control>();
             random = new Random();
@@ -35,14 +36,13 @@ namespace Game
             map.Generate();
             SpawnPlayer();
             i = 0;
-            gameForm.Width = 1280;
-            gameForm.Height = 720;
-            gameForm.Centered();
+            width = 1280;
+            height = 720;
         }
 
         public void MovePlayer(Point _direction)
         {
-            player.PlusPosition(_direction);
+            player.Force = _direction;
         }
 
         public void EnemyLogic()
@@ -72,6 +72,7 @@ namespace Game
                     }
                 }
             }
+            visualizer.SetData(entities);
         }
 
         // Объкты (Модель) - Контроллер - Представление
@@ -82,7 +83,7 @@ namespace Game
             _playerPanel.BackgroundImage = Properties.Resources.ship2;
             _playerPanel.BackgroundImageLayout = ImageLayout.Zoom;
             _playerPanel.Size = new Size(25, 25);
-            _playerPanel.Location = new Point((gameForm.Width - _playerPanel.Width) / 2, (gameForm.Height - _playerPanel.Height) / 2);
+            _playerPanel.Location = new Point((width - _playerPanel.Width) / 2, (height - _playerPanel.Height) / 2);
             gameForm.Controls.Add(_playerPanel);
             player = new Player(gameForm, _playerPanel);
             _playerPanel.BringToFront();
@@ -103,11 +104,11 @@ namespace Game
             _enemyPanel.Size = new Size(size, size);
             int x, y;
             if (random.Next(0, 10) > 5)
-                x = gameForm.Width;
+                x = width;
             else
                 x = 0;
             if (random.Next(0, 10) > 5)
-                y = gameForm.Height;
+                y = height;
             else
                 y = 0;
             _enemyPanel.Location = new Point(x, y);

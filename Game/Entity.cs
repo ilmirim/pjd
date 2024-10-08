@@ -3,33 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Game
 {
     public class Entity
     {
-        private int hp;
-        private int damage;
-        private int hpMax;
-        public enum EntityType
-        { 
-            player, enemy
-        }
-        private EntityType type;
-        public EntityType Type => type;
-        public int Damage => damage;
-        public int HP => hp;
-        public Entity(EntityType _type = EntityType.enemy, int _hp = 1, int _damage = 1)
+        public int X, Y;
+        private Figure visualFigure, colliderFigure;
+        private int speed;
+        public Figure VisualFigure => visualFigure;
+        public Figure ColliderFigure => colliderFigure;
+        public int Speed => speed;
+        public Entity(Point _coordinates, Figure _visual, Figure _collider, int _speed) 
         {
-            hp = _hp;
-            hpMax = _hp;
-            damage = _damage;
-            type = _type;
-        }
-        public void TakeDamage(int _damage)
-        {
-            hp -= _damage;
+            X = _coordinates.X;
+            Y = _coordinates.Y;
+            visualFigure = _visual;
+            colliderFigure = _collider;
+            speed = _speed;
         }
     }
 }

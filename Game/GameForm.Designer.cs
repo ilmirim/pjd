@@ -34,6 +34,7 @@ namespace Game
             this.TextTimer = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.VisTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -75,6 +76,11 @@ namespace Game
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // VisTimer
+            // 
+            this.VisTimer.Interval = 10;
+            this.VisTimer.Tick += new System.EventHandler(this.VisTimer_Tick);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,5 +108,6 @@ namespace Game
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label TextTimer;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer VisTimer;
     }
 }

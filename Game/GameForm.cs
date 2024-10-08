@@ -13,6 +13,7 @@ namespace Game
     public partial class GameForm : Form
     {
         private GameController game;
+        private GameVisualizer visualizer;
         private Point directionVector;
         private int seconds;
         private Form menuForm;
@@ -24,8 +25,8 @@ namespace Game
             CenterToScreen();
 
             this.BackColor = Color.White;
-
-            game = new GameController(this);
+            visualizer = new GameVisualizer(this);
+            game = new GameController(this, visualizer);
             menuForm = _menuForm;
         }
 
@@ -33,25 +34,26 @@ namespace Game
         private void GameForm_Load(object sender, EventArgs e)
         {
             game.Start();
+            CenterToScreen();
         }
 
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.W)
             {
-                directionVector.Y = -5;
+                directionVector.Y = -1;
             }
             if (e.KeyCode == Keys.D)
             {
-                directionVector.X = 5;
+                directionVector.X = 1;
             }
             if (e.KeyCode == Keys.S)
             {
-                directionVector.Y = 5;
+                directionVector.Y = 1;
             }
             if (e.KeyCode == Keys.A)
             {
-                directionVector.X = -5;
+                directionVector.X = -1;
             }
         }
         private void GameForm_KeyUp(object sender, KeyEventArgs e)
@@ -89,6 +91,10 @@ namespace Game
             }
             TextTimer.Text = $"Time: {seconds}";
         }
+        private void VisTimer_Tick(object sender, EventArgs e)
+        {
+            visualizer.Visualize();
+        }
 
         private void GameForm_Deactivate(object sender, EventArgs e)
         {
@@ -98,9 +104,6 @@ namespace Game
             menuForm.Show();
         }
 
-        public void Centered()
-        {
-            CenterToScreen();
-        }
+        
     }
 }
