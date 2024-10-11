@@ -60,27 +60,16 @@ namespace Game
                     entities.Remove(entity);
                     return;
                 }
-                if(entity.VisualFigure.Type == Figure.FigureType.square)
-                {
-                    if ((x + size > player.Position.X && x < player.Position.X) ||
+                if ((x + size > player.Position.X && x < player.Position.X) ||
                     (x + size > player.Position.X + player.VisualFigure.Size && x < player.Position.X + player.VisualFigure.Size))
-                    {
-                        if ((y + size > player.Position.Y && y < player.Position.Y) ||
-                        (y + size > player.Position.Y + player.VisualFigure.Size && y < player.Position.Y + player.VisualFigure.Size))
-                        {
-                            LoseGame();
-                        }
-                    }
-                }
-                else if(entity.VisualFigure.Type == Figure.FigureType.circle)
                 {
-                    var ssize = Convert.ToInt32(float.Parse(entity.VisualFigure.Size.ToString()) * 0.75f);
-                    if (Math.Abs(entity.X - player.X) < ssize)
+                    if ((y + size > player.Position.Y && y < player.Position.Y) ||
+                    (y + size > player.Position.Y + player.VisualFigure.Size && y < player.Position.Y + player.VisualFigure.Size))
                     {
                         LoseGame();
                     }
-                    else if()
                 }
+                
             }
             visualizer.SetData(entities, player);
         }

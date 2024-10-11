@@ -67,7 +67,7 @@ namespace Game
             // VisTimer
             // 
             this.VisTimer.Enabled = true;
-            this.VisTimer.Interval = 20;
+            this.VisTimer.Interval = 1;
             this.VisTimer.Tick += new System.EventHandler(this.VisTimer_Tick);
             // 
             // pictureBox1
