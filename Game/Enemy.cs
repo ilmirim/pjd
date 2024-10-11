@@ -14,7 +14,7 @@ namespace Game
         private int liveTime;
         private int time;
         public Point GetDirection => direction;
-        public Enemy(int _livetime, Point _direction, EntityType _entityType = EntityType.enemy, int _hp = 1, int _damage = 1) : base(_entityType, _hp, _damage)
+        public Enemy(int _livetime, Point _direction, Point _coordinates, Figure _visual, Figure _collider, int _speed = 1) : base(_coordinates, _visual, _collider, _speed)
         {
             time = 0;
             direction = _direction;

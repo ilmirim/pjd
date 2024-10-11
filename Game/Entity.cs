@@ -16,6 +16,15 @@ namespace Game
         public Figure VisualFigure => visualFigure;
         public Figure ColliderFigure => colliderFigure;
         public int Speed => speed;
+        public virtual Point Position
+        {
+            get => new Point(X, Y);
+            set
+            {
+                X = value.X;
+                Y = value.Y;
+            }
+        }
         public Entity(Point _coordinates, Figure _visual, Figure _collider, int _speed) 
         {
             X = _coordinates.X;

@@ -11,21 +11,31 @@ namespace Game
     internal class GameVisualizer
     {
         private GameForm gameForm;
-        private Dictionary<Enemy, Control> entities;
-        private Graphics graphics;
+        private List<Enemy> entities;
+        private Player player;
         public GameVisualizer(GameForm _gameForm) 
         {
             gameForm = _gameForm;
         }
 
-        public void SetData(Dictionary<Enemy, Control> _entities)
+        public void SetData(List<Enemy> _entities, Player _player)
         {
             entities = _entities;
+            player = _player;
         }
 
         public void Visualize()
         {
-
+            var entityInfo = new Dictionary<Point, Figure>();
+            entityInfo.Add(player.Position, player.VisualFigure);
+            foreach(var entity in entities)
+            {
+                if(!entityInfo.ContainsKey(entity.Position))
+                {
+                    entityInfo.Add(entity.Position, entity.VisualFigure);
+                }
+            }
+            gameForm.DrawObjects(entityInfo);
         }
     }
 }

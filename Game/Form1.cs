@@ -47,8 +47,6 @@ namespace Game
 
         private void Form1_Activated(object sender, EventArgs e)
         {
-            openSound.Play();
-            Thread.Sleep(3200);
             if(saveSystem.isActiveMusic)
                 music.Play();
             Focus();
