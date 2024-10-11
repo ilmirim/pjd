@@ -110,7 +110,7 @@ namespace Game
             saveSystem.AddNewTry(seconds.ToString());
             menuForm.Show();
         }
-
+        
         public void DrawObjects(Dictionary<Point, Figure> _entitiesInfo)
         {
             entitiesInfo = _entitiesInfo;
@@ -119,6 +119,7 @@ namespace Game
 
         private void PaintEntities(object sender, PaintEventArgs e)
         {
+            //Bitmap
             graphics.Clear(pictureBox1.BackColor);
             var rect = new Rectangle(entitiesInfo.ElementAt(0).Key.X, entitiesInfo.ElementAt(0).Key.Y, entitiesInfo.ElementAt(0).Value.Size, entitiesInfo.ElementAt(0).Value.Size);
             graphics.DrawImage(Properties.Resources.ship2, rect);

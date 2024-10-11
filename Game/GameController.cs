@@ -67,6 +67,9 @@ namespace Game
                     (y + size > player.Position.Y + player.VisualFigure.Size && y < player.Position.Y + player.VisualFigure.Size))
                     {
                         LoseGame();
+                        //Enabled=false;
+                        var diedForm = new DiedForm();
+                        diedForm.Show();
                     }
                 }
                 
@@ -106,7 +109,7 @@ namespace Game
         
         private void LoseGame()
         {
-            Form.ActiveForm.Dispose();
+            //Form.ActiveForm.Dispose();
         }
     }
 }

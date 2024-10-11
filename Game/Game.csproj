@@ -64,6 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DiedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DiedForm.Designer.cs">
+      <DependentUpon>DiedForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Enemy.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityManager.cs" />
@@ -93,6 +99,9 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DiedForm.resx">
+      <DependentUpon>DiedForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

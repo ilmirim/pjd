@@ -90,9 +90,10 @@ namespace Game
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "GameForm";
-            this.Text = "GameForm";
+            this.Text = " ";
             this.Deactivate += new System.EventHandler(this.GameForm_Deactivate);
             this.Load += new System.EventHandler(this.GameForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
