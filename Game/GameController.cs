@@ -52,7 +52,11 @@ namespace Game
             {
                 var x = entity.X;
                 var y = entity.Y;
-
+                if ((float)x > (float)width * 1.25f || (float)y > (float)height * 1.25f)
+                {
+                    entities.Remove(entity);
+                    return;
+                }
                 var size = entity.ColliderFigure.Size;
                 entity.Position = new Point(x + entity.GetDirection.X, y + entity.GetDirection.Y);
                 if(!entity.PlusTime())
@@ -60,17 +64,18 @@ namespace Game
                     entities.Remove(entity);
                     return;
                 }
-                if(entity.VisualFigure.Type == Figure.FigureType.square)
+                if ((x + size > player.Position.X && x < player.Position.X) ||
+                     (x + size > player.Position.X + player.VisualFigure.Size && x < player.Position.X + player.VisualFigure.Size))
                 {
-                    if ((x + size > player.Position.X && x < player.Position.X) ||
-                    (x + size > player.Position.X + player.VisualFigure.Size && x < player.Position.X + player.VisualFigure.Size))
+                    if ((y + size > player.Position.Y && y < player.Position.Y) ||
+                    (y + size > player.Position.Y + player.VisualFigure.Size && y < player.Position.Y + player.VisualFigure.Size))
                     {
-                        if ((y + size > player.Position.Y && y < player.Position.Y) ||
-                        (y + size > player.Position.Y + player.VisualFigure.Size && y < player.Position.Y + player.VisualFigure.Size))
-                        {
-                            LoseGame();
-                        }
+                        LoseGame();
                     }
+                }
+                /*if (entity.VisualFigure.Type == Figure.FigureType.square)
+                {
+                    
                 }
                 else if(entity.VisualFigure.Type == Figure.FigureType.circle)
                 {
@@ -79,8 +84,11 @@ namespace Game
                     {
                         LoseGame();
                     }
-                    else if()
-                }
+                    else if(Math.Abs(entity.Y - player.Y) < ssize)
+                    {
+                        LoseGame();
+                    }
+                }*/
             }
             visualizer.SetData(entities, player);
         }

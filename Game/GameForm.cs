@@ -20,7 +20,7 @@ namespace Game
         private int i;
         private Dictionary<Point, Figure> entitiesInfo;
         private Graphics graphics;
-        public PictureBox background => pictureBox1; 
+        public PictureBox background => pictureBox1;
 
         public GameForm(Form _menuForm)
         {
@@ -89,7 +89,7 @@ namespace Game
             game.EnemyLogic();
 
             i++;
-            if(i % 25 == 0)
+            if (i % 10 == 0)
                 game.SpawnEnemy();
             if (i == 50)
             {
@@ -100,7 +100,7 @@ namespace Game
         }
         private void VisTimer_Tick(object sender, EventArgs e)
         {
-             visualizer.Visualize();
+            visualizer.Visualize();
         }
 
         private void GameForm_Deactivate(object sender, EventArgs e)
@@ -114,22 +114,27 @@ namespace Game
         public void DrawObjects(Dictionary<Point, Figure> _entitiesInfo)
         {
             entitiesInfo = _entitiesInfo;
-            PaintEntities(pictureBox1, null);
+            PaintEntities();
         }
 
-        private void PaintEntities(object sender, PaintEventArgs e)
+        private void PaintEntities()
         {
-            graphics.Clear(pictureBox1.BackColor);
+            var bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics graphics = Graphics.FromImage(bmp);
+
             var rect = new Rectangle(entitiesInfo.ElementAt(0).Key.X, entitiesInfo.ElementAt(0).Key.Y, entitiesInfo.ElementAt(0).Value.Size, entitiesInfo.ElementAt(0).Value.Size);
             graphics.DrawImage(Properties.Resources.ship2, rect);
             var i = -1;
-            foreach(var enemy in entitiesInfo)
+            foreach (var enemy in entitiesInfo)
             {
                 i++;
                 if (i == 0) continue;
                 var rectEnemy = new Rectangle(enemy.Key.X, enemy.Key.Y, enemy.Value.Size, enemy.Value.Size);
-                graphics.DrawImage(Properties.Resources._64x64 , rectEnemy);
+                graphics.DrawImage(Properties.Resources._64x64, rectEnemy);
             }
+
+            pictureBox1.Image = bmp;
+            Refresh();
         }
     }
 }

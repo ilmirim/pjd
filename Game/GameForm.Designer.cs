@@ -67,7 +67,7 @@ namespace Game
             // VisTimer
             // 
             this.VisTimer.Enabled = true;
-            this.VisTimer.Interval = 20;
+            this.VisTimer.Interval = 5;
             this.VisTimer.Tick += new System.EventHandler(this.VisTimer_Tick);
             // 
             // pictureBox1
@@ -81,7 +81,6 @@ namespace Game
             this.pictureBox1.Size = new System.Drawing.Size(1264, 681);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintEntities);
             // 
             // GameForm
             // 
@@ -90,6 +89,7 @@ namespace Game
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "GameForm";
             this.Text = "GameForm";
