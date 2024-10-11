@@ -1,0 +1,16 @@
+// Объкты (Модель) - Контроллер - Представление
+
+<- - дополнительно
+-> - наследование
+))) - включение методов
+
+OBJ
+Entities[coord (x, y), size (x, y), speed (x, y), type (0(asteroids), 1(player))]  
+Entity <- [Collider(size (x, y)), type (circle/square), automate - center]
+Player[<Entities>] -> Entity
+
+CONTROLLER
+Player ))) Player, GetCollider(x, y, size, type)
+Collider ))) x, y, size, type
+
+VISUALISATION

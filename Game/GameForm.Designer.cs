@@ -33,6 +33,7 @@ namespace Game
             this.panel1 = new System.Windows.Forms.Panel();
             this.TextTimer = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.VisTimer = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -49,7 +50,7 @@ namespace Game
             // TextTimer
             // 
             this.TextTimer.AutoSize = true;
-            this.TextTimer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TextTimer.Dock = System.Windows.Forms.DockStyle.Top;
             this.TextTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TextTimer.Location = new System.Drawing.Point(0, 0);
             this.TextTimer.Name = "TextTimer";
@@ -63,6 +64,12 @@ namespace Game
             this.timer1.Interval = 5;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // VisTimer
+            // 
+            this.VisTimer.Enabled = true;
+            this.VisTimer.Interval = 1;
+            this.VisTimer.Tick += new System.EventHandler(this.VisTimer_Tick);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(29)))), ((int)(((byte)(41)))));
@@ -74,6 +81,7 @@ namespace Game
             this.pictureBox1.Size = new System.Drawing.Size(1264, 681);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintEntities);
             // 
             // GameForm
             // 
@@ -97,10 +105,10 @@ namespace Game
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label TextTimer;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer VisTimer;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

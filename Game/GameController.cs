@@ -8,114 +8,105 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows;
 using System.Media;
-using System.Diagnostics;
 
 namespace Game
 {
+
     internal class GameController
     {
+        private GameVisualizer visualizer;
         private MapSystem map;
         private Player player;
-        private GameController game;
-        private Control playerControl;
-        private GameForm gameForm;
-        private Dictionary<Enemy, Control> entities;
+        private List<Enemy> entities;
         private Random random;
+        private int width, height;
         private int i;
 
-        public GameController(GameForm _gameForm)
+        public GameController(GameForm _gameForm, GameVisualizer _gameVisualizer)
         {
-            gameForm = _gameForm;
+            visualizer = _gameVisualizer;
             map = new MapSystem();
-            entities = new Dictionary<Enemy, Control>();
+            entities = new List<Enemy>();
+            player = SpawnPlayer();
+            visualizer.SetData(entities, player);
             random = new Random();
+            width = 1280;
+            height = 720;
         }
 
         public void Start()
         {
             map.Generate();
-            SpawnPlayer();
             i = 0;
         }
-        public void Stop()
-        {
-            
-        }
-
 
         public void MovePlayer(Point _direction)
         {
-            player.PlusPosition(_direction);
+            player.Force = _direction;
+            player.Position = new Point(player.X + _direction.X*player.Speed, player.Y + _direction.Y*player.Speed);
         }
 
         public void EnemyLogic()
         {
             foreach (var entity in entities)
             {
-                var x = entity.Value.Location.X;
-                var y = entity.Value.Location.Y;
+                var x = entity.X;
+                var y = entity.Y;
 
-                var sizeX = entity.Value.Width;
-                var sizeY = entity.Value.Height;
-                entity.Value.Location = new Point(x + entity.Key.GetDirection.X, y + entity.Key.GetDirection.Y);
-                if(!entity.Key.PlusTime())
+                var size = entity.ColliderFigure.Size;
+                entity.Position = new Point(x + entity.GetDirection.X, y + entity.GetDirection.Y);
+                if(!entity.PlusTime())
                 {
-                    entity.Value.Dispose();
-                    entities.Remove(entity.Key);
+                    entities.Remove(entity);
                     return;
                 }
-                if ((x + sizeX > playerControl.Location.X && x < playerControl.Location.X) ||
-                    (x + sizeX > playerControl.Location.X + playerControl.Width && x < playerControl.Location.X + playerControl.Width))
+                if ((x + size > player.Position.X && x < player.Position.X) ||
+                    (x + size > player.Position.X + player.VisualFigure.Size && x < player.Position.X + player.VisualFigure.Size))
                 {
-                    if((y + sizeY > playerControl.Location.Y && y < playerControl.Location.Y) ||
-                    (y + sizeY > playerControl.Location.Y + playerControl.Height && y < playerControl.Location.Y + playerControl.Height))
+                    if ((y + size > player.Position.Y && y < player.Position.Y) ||
+                    (y + size > player.Position.Y + player.VisualFigure.Size && y < player.Position.Y + player.VisualFigure.Size))
                     {
-                        playerControl.BackColor = Color.Red;
                         LoseGame();
                     }
                 }
+                
             }
+            visualizer.SetData(entities, player);
         }
 
-        private void SpawnPlayer()
+        private Player SpawnPlayer()
         {
-            PictureBox _playerPanel = new PictureBox();
-            _playerPanel.BackColor = Color.FromArgb(27, 29, 41);
-            _playerPanel.BackgroundImage = Properties.Resources.ship2;
-            _playerPanel.BackgroundImageLayout = ImageLayout.Zoom;
-            _playerPanel.Size = new Size(20, 20);
-            _playerPanel.Location = new Point((1280 - _playerPanel.Width) / 2, (720 - _playerPanel.Height) / 2);
-            gameForm.Controls.Add(_playerPanel);
-            player = new Player(gameForm, _playerPanel);
-            _playerPanel.BringToFront();
-            playerControl = _playerPanel;
+            var _playerFigure = new Figure(Figure.FigureType.square, 25);
+            var _playerColliderFigure = new Figure(Figure.FigureType.square, 20);
+            var _player = new Player(1280, 720,
+                new Point((1280 - _playerFigure.Size) / 2, (720 - _playerFigure.Size) / 2), 
+                _playerFigure, 
+                _playerColliderFigure, 5);
+            return _player;
         }
 
         public void SpawnEnemy()
         {
-            Panel _enemyPanel = new Panel();
-            int size = random.Next(25, 100);
-            _enemyPanel.Size = new Size(size, size);
-            int x = 0;
-            int y = 0;
+            int x, y;
             if (random.Next(0, 10) > 5)
-                x = 1280;
+                x = width;
             else
                 x = 0;
             if (random.Next(0, 10) > 5)
-                y = 720;
+                y = height;
             else
                 y = 0;
-            _enemyPanel.Location = new Point(x, y);
-            _enemyPanel.BackColor = Color.Red;
-            gameForm.Controls.Add(_enemyPanel);
-            _enemyPanel.BringToFront();
-            entities.Add(new Enemy(5, new Point(x == 1280 ? -random.Next(1, 5)*100/size : random.Next(1, 5) * 100 / size, y == 720 ? -random.Next(1, 5) * 100 / size : random.Next(1, 5) * 100 / size)), _enemyPanel);
+            var size = random.Next(25, 150);
+            var enemyFigure = new Figure(Figure.FigureType.circle, size);
+            var enemyColliderFigure = new Figure(Figure.FigureType.circle, Convert.ToInt32(float.Parse(size.ToString()) * 0.75f));
+            var dir = new Point(x == width ? -random.Next(1, 5) * 100 / size : random.Next(1, 5) * 100 / size, y == height ? -random.Next(1, 5) * 100 / size : random.Next(1, 5) * 100 / size);
+            var enemy = new Enemy(10, dir, new Point(x, y), enemyFigure, enemyFigure);
+            entities.Add(enemy);
         }
         
         private void LoseGame()
         {
-            gameForm.Dispose();
+            Form.ActiveForm.Dispose();
         }
     }
 }

@@ -13,58 +13,71 @@ namespace Game
     public partial class GameForm : Form
     {
         private GameController game;
+        private GameVisualizer visualizer;
         private Point directionVector;
         private int seconds;
         private Form menuForm;
         private int i;
-        private int min=0;
+        private Dictionary<Point, Figure> entitiesInfo;
+        private Graphics graphics;
+        public PictureBox background => pictureBox1; 
+
         public GameForm(Form _menuForm)
         {
             InitializeComponent();
             CenterToScreen();
-            game = new GameController(this);
+
+            this.BackColor = Color.White;
+            visualizer = new GameVisualizer(this);
+            game = new GameController(this, visualizer);
+            entitiesInfo = new Dictionary<Point, Figure>();
+            entitiesInfo.Add(new Point(0, 0), new Figure(Figure.FigureType.circle, 1));
             menuForm = _menuForm;
+            graphics = pictureBox1.CreateGraphics();
+            DoubleBuffered = true;
         }
+
         //Прогрузка объектов и сущностей при созданит сцены
         private void GameForm_Load(object sender, EventArgs e)
         {
             game.Start();
+            CenterToScreen();
         }
 
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.W)
             {
-                directionVector.Y = -5;
+                directionVector.Y = -1;
             }
-            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.D)
             {
-                directionVector.X = 5;
+                directionVector.X = 1;
             }
-            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+            if (e.KeyCode == Keys.S)
             {
-                directionVector.Y = 5;
+                directionVector.Y = 1;
             }
-            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)  
+            if (e.KeyCode == Keys.A)
             {
-                directionVector.X = -5;
+                directionVector.X = -1;
             }
         }
         private void GameForm_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.W)
             {
                 directionVector.Y = 0;
             }
-            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.D)
             {
                 directionVector.X = 0;
             }
-            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+            if (e.KeyCode == Keys.S)
             {
                 directionVector.Y = 0;
             }
-            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.A)
             {
                 directionVector.X = 0;
             }
@@ -76,27 +89,47 @@ namespace Game
             game.EnemyLogic();
 
             i++;
-            if (i%25==0)
+            if(i % 5d == 0)
                 game.SpawnEnemy();
             if (i == 50)
             {
                 i = 0;
                 seconds++;
             }
-            if (seconds>59)
-            {
-                seconds = 0;
-                min += 1;
-            }
-            TextTimer.Text = $"Time: {min}:{seconds}";
+            TextTimer.Text = $"Time: {seconds}";
+        }
+        private void VisTimer_Tick(object sender, EventArgs e)
+        {
+             visualizer.Visualize();
         }
 
         private void GameForm_Deactivate(object sender, EventArgs e)
         {
             menuForm.TopMost = true;
             SaveSystem saveSystem = new SaveSystem("pjd Project");
-            saveSystem.AddNewTry($"time 0:{seconds}");
+            saveSystem.AddNewTry(seconds.ToString());
             menuForm.Show();
+        }
+
+        public void DrawObjects(Dictionary<Point, Figure> _entitiesInfo)
+        {
+            entitiesInfo = _entitiesInfo;
+            PaintEntities(pictureBox1, null);
+        }
+
+        private void PaintEntities(object sender, PaintEventArgs e)
+        {
+            graphics.Clear(pictureBox1.BackColor);
+            var rect = new Rectangle(entitiesInfo.ElementAt(0).Key.X, entitiesInfo.ElementAt(0).Key.Y, entitiesInfo.ElementAt(0).Value.Size, entitiesInfo.ElementAt(0).Value.Size);
+            graphics.DrawImage(Properties.Resources.ship2, rect);
+            var i = -1;
+            foreach(var enemy in entitiesInfo)
+            {
+                i++;
+                if (i == 0) continue;
+                var rectEnemy = new Rectangle(enemy.Key.X, enemy.Key.Y, enemy.Value.Size, enemy.Value.Size);
+                graphics.DrawImage(Properties.Resources._64x64 , rectEnemy);
+            }
         }
     }
 }
