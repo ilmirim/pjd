@@ -52,13 +52,13 @@ namespace Game
             Focus();
             listView1.Clear();
             var record = 0;
-            foreach (var item in saveSystem.GetAllTryes())
+            /*foreach (var item in saveSystem.GetAllTryes())
             {
                 listView1.Items.Add($"time - {item} sec");
                 int seconds = int.Parse(item);
                 if (record < seconds)
                     record = seconds;
-            }
+            }*/
             int firstNumber = record > 59 ? record / 60 : 0;
             int secondNumber = record > 59 ? record - (record / 60) * 60 : record;
             label3.Text = $"{firstNumber}:{secondNumber}";
