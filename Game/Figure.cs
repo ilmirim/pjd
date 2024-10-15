@@ -16,12 +16,29 @@ namespace Game
         private FigureType type;
         private int size;
         public FigureType Type => type;
-        public int Size => size;
+        public int Size
+        {
+            get => size;
+            set
+            {
+                size = value < 1 ? 1 : value;
+            }
+        }
 
         public Figure(FigureType _type = FigureType.square, int _size = 25) 
         {
             size = _size;
             type = _type;  
+        }
+        public Figure(int _size)
+        {
+            size = 25;
+            type = FigureType.square;
+        }
+        public Figure()
+        {
+            size = 25;
+            type = FigureType.square;
         }
     }
 }

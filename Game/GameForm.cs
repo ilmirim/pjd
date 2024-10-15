@@ -87,9 +87,9 @@ namespace Game
         {
             game.MovePlayer(directionVector);
             game.EnemyLogic();
-
+            
             i++;
-            if (i % 10 == 0)
+            if (i % 25 == 0)
                 game.SpawnEnemy();
             if (i == 50)
             {

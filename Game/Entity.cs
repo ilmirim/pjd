@@ -15,7 +15,11 @@ namespace Game
         private int speed;
         public Figure VisualFigure => visualFigure;
         public Figure ColliderFigure => colliderFigure;
-        public int Speed => speed;
+        public int Speed
+        { 
+            get => speed; 
+            set => speed = value < 1 ? 1 : value;
+        }
         public virtual Point Position
         {
             get => new Point(X, Y);
@@ -31,7 +35,15 @@ namespace Game
             Y = _coordinates.Y;
             visualFigure = _visual;
             colliderFigure = _collider;
-            speed = _speed;
+            Speed = _speed;
+        }
+        public Entity(int _speed)
+        {
+            X = 0;
+            Y = 0;
+            visualFigure = new Figure();
+            colliderFigure = new Figure();
+            Speed = _speed;
         }
     }
 }
