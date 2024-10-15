@@ -9,7 +9,7 @@ namespace UnitTest
         [SetUp]
         public void Setup()
         {
-            entity = new Player(5, 5, Point.Empty, new Figure(), new Figure(), 5);
+            entity = new Player(1280, 720, Point.Empty, new Figure(), new Figure(), 5);
         }
 
         [TestCase(21341, 411)]

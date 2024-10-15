@@ -115,10 +115,20 @@ namespace Game
                 y = height;
             else
                 y = 0;
+
             var size = random.Next(25, 150);
             var enemyFigure = new Figure(Figure.FigureType.circle, size);
             var enemyColliderFigure = new Figure(Figure.FigureType.circle, Convert.ToInt32(float.Parse(size.ToString()) * 0.75f));
-            var dir = new Point(x == width ? -random.Next(1, 5) * 100 / size : random.Next(1, 5) * 100 / size, y == height ? -random.Next(1, 5) * 100 / size : random.Next(1, 5) * 100 / size);
+            
+            var dir = new Point(
+                x == width
+                ? -random.Next(1, 5) * 100 / size
+                : random.Next(1, 5) * 100 / size,
+
+                y == height
+                ? -random.Next(1, 5) * 100 / size
+                : random.Next(1, 5) * 100 / size);
+
             var enemy = new Enemy(10, dir, new Point(x, y), enemyFigure, enemyFigure);
             entities.Add(enemy);
         }
