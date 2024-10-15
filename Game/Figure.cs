@@ -23,5 +23,11 @@ namespace Game
             size = _size;
             type = _type;  
         }
+        public Figure(int _size)
+        {
+            size = _size;
+            type = new FigureType();
+        }
+
     }
 }

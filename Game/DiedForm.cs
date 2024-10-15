@@ -28,5 +28,16 @@ namespace Game
             if (e.KeyCode == Keys.Escape) {}
             if (e.KeyCode == Keys.Space) {}
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+
+        }
     }
 }

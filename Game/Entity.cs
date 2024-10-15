@@ -33,5 +33,16 @@ namespace Game
             colliderFigure = _collider;
             speed = _speed;
         }
+
+        public Entity(int _speed)
+        {
+            X = 0;
+            Y = 0;
+            visualFigure = new Figure();
+            colliderFigure = new Figure();
+            speed = _speed;
+               
+        }
+            
     }
 }
