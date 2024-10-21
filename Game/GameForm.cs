@@ -46,38 +46,38 @@ namespace Game
 
 		private void GameForm_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.W)
+			if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
 			{
 				directionVector.Y = -1;
 			}
-			if (e.KeyCode == Keys.D)
+			if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
 			{
 				directionVector.X = 1;
 			}
-			if (e.KeyCode == Keys.S)
+			if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
 			{
 				directionVector.Y = 1;
 			}
-			if (e.KeyCode == Keys.A)
+			if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
 			{
 				directionVector.X = -1;
 			}
 		}
 		private void GameForm_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.W)
+			if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
 			{
 				directionVector.Y = 0;
 			}
-			if (e.KeyCode == Keys.D)
+			if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
 			{
 				directionVector.X = 0;
 			}
-			if (e.KeyCode == Keys.S)
+			if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
 			{
 				directionVector.Y = 0;
 			}
-			if (e.KeyCode == Keys.A)
+			if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
 			{
 				directionVector.X = 0;
 			}
@@ -89,7 +89,7 @@ namespace Game
 			game.EnemyLogic();
 
 			i++;
-			if(i % 5d == 0)
+			if(i % 25 == 0)
 				game.SpawnEnemy();
 			if (i == 50)
 			{
@@ -114,13 +114,14 @@ namespace Game
 		public void DrawObjects(Dictionary<Point, Figure> _entitiesInfo)
 		{
 			entitiesInfo = _entitiesInfo;
-			PaintEntities(pictureBox1, null);
+			PaintEntities();
 		}
 
-		private void PaintEntities(object sender, PaintEventArgs e)
+		private void PaintEntities()
 		{
-			//Bitmap
-			graphics.Clear(pictureBox1.BackColor);
+			var bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+			Graphics graphics = Graphics.FromImage(bmp);
+			
 			var rect = new Rectangle(entitiesInfo.ElementAt(0).Key.X, entitiesInfo.ElementAt(0).Key.Y, entitiesInfo.ElementAt(0).Value.Size, entitiesInfo.ElementAt(0).Value.Size);
 			graphics.DrawImage(Properties.Resources.ship2, rect);
 			var i = -1;
@@ -131,6 +132,8 @@ namespace Game
 				var rectEnemy = new Rectangle(enemy.Key.X, enemy.Key.Y, enemy.Value.Size, enemy.Value.Size);
 				graphics.DrawImage(Properties.Resources._64x64 , rectEnemy);
 			}
+			pictureBox1.Image = bmp;
+			Refresh();
 		}
 	}
 }

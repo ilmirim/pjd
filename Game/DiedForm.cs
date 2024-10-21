@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,7 @@ namespace Game
     {
         private Graphics graphics;
         private GameForm GameForm;
+        private int i;
         public DiedForm()
         {
             InitializeComponent();
@@ -25,7 +27,7 @@ namespace Game
 
         private void DiedForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape) {}
+            if (e.KeyCode == Keys.Escape) { Close(); }
             if (e.KeyCode == Keys.Space) {}
         }
 
@@ -36,7 +38,14 @@ namespace Game
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            i++;
+            pictureBox1.Image = Properties.Resources.ship2;
+            if (i > 10)
+            {
+                pictureBox1.Image = Properties.Resources._64x64;
+            }
             
+            pictureBox1.Refresh();  
 
         }
     }
