@@ -15,7 +15,6 @@ namespace Game
     internal class GameController
     {
         private GameVisualizer visualizer;
-        private MapSystem map;
         private Player player;
         private List<Enemy> entities;
         private Random random;
@@ -25,19 +24,19 @@ namespace Game
         public GameController(GameForm _gameForm, GameVisualizer _gameVisualizer)
         {
             visualizer = _gameVisualizer;
-            map = new MapSystem();
             entities = new List<Enemy>();
+            width = 1280;
+            height = 720;
             player = SpawnPlayer();
             visualizer.SetData(entities, player);
             random = new Random();
-            width = 1280;
-            height = 720;
         }
 
-        public void Start()
+        public void Start(int w, int h)
         {
-            map.Generate();
             i = 0;
+            width = w;
+            height = h;
         }
 
         public void MovePlayer(Point _direction)
@@ -58,17 +57,18 @@ namespace Game
                     return;
                 }
                 var size = entity.ColliderFigure.Size;
-                entity.Position = new Point(x + entity.GetDirection.X, y + entity.GetDirection.Y);
-                if(!entity.PlusTime())
+                entity.Position = new Point(x + entity.Direction.X, y + entity.Direction.Y);
+                entity.Update(1);
+                if(!entity.IsAlive)
                 {
                     entities.Remove(entity);
                     return;
                 }
                 if ((x + size > player.Position.X && x < player.Position.X) ||
-                     (x + size > player.Position.X + player.VisualFigure.Size && x < player.Position.X + player.VisualFigure.Size))
+                     (x + size > player.Position.X + size && x < player.Position.X + size))
                 {
                     if ((y + size > player.Position.Y && y < player.Position.Y) ||
-                    (y + size > player.Position.Y + player.VisualFigure.Size && y < player.Position.Y + player.VisualFigure.Size))
+                    (y + size > player.Position.Y + size && y < player.Position.Y + size))
                     {
                         LoseGame();
                     }
@@ -96,9 +96,9 @@ namespace Game
         private Player SpawnPlayer()
         {
             var _playerFigure = new Figure(Figure.FigureType.square, 25);
-            var _playerColliderFigure = new Figure(Figure.FigureType.square, 20);
-            var _player = new Player(1280, 720,
-                new Point((1280 - _playerFigure.Size) / 2, (720 - _playerFigure.Size) / 2), 
+            var _playerColliderFigure = new Figure(Properties.Resources.ship2, Figure.FigureType.square, 20);
+            var _player = new Player(width, height,
+                new Point((width - _playerFigure.Size) / 2, (height - _playerFigure.Size) / 2), 
                 _playerFigure, 
                 _playerColliderFigure, 5);
             return _player;
@@ -117,8 +117,8 @@ namespace Game
                 y = 0;
 
             var size = random.Next(25, 150);
-            var enemyFigure = new Figure(Figure.FigureType.circle, size);
-            var enemyColliderFigure = new Figure(Figure.FigureType.circle, Convert.ToInt32(float.Parse(size.ToString()) * 0.75f));
+            var enemyFigure = new Figure(Properties.Resources._32x32, Figure.FigureType.circle, size);
+            var enemyColliderFigure = new Figure(Figure.FigureType.circle, Convert.ToInt32(float.Parse(size.ToString()) * 0.5f));
             
             var dir = new Point(
                 x == width

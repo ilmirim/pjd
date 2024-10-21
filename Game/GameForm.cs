@@ -40,7 +40,7 @@ namespace Game
         //Прогрузка объектов и сущностей при созданит сцены
         private void GameForm_Load(object sender, EventArgs e)
         {
-            game.Start();
+            game.Start(Width, Height);
             CenterToScreen();
         }
 
@@ -123,14 +123,14 @@ namespace Game
             Graphics graphics = Graphics.FromImage(bmp);
 
             var rect = new Rectangle(entitiesInfo.ElementAt(0).Key.X, entitiesInfo.ElementAt(0).Key.Y, entitiesInfo.ElementAt(0).Value.Size, entitiesInfo.ElementAt(0).Value.Size);
-            graphics.DrawImage(Properties.Resources.ship2, rect);
+            graphics.DrawImage(entitiesInfo.ElementAt(0).Value.Image, rect);
             var i = -1;
             foreach (var enemy in entitiesInfo)
             {
                 i++;
                 if (i == 0) continue;
                 var rectEnemy = new Rectangle(enemy.Key.X, enemy.Key.Y, enemy.Value.Size, enemy.Value.Size);
-                graphics.DrawImage(Properties.Resources._64x64, rectEnemy);
+                graphics.DrawImage(enemy.Value.Image, rectEnemy);
             }
 
             pictureBox1.Image = bmp;
