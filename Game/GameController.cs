@@ -18,15 +18,20 @@ namespace Game
         private Player player;
         private List<Enemy> entities;
         private Random random;
+        DeactivateForm deactivateForm;
         private int width, height;
         private int i;
+
+        private delegate void DeactivateForm();
+
 
         public GameController(GameForm _gameForm, GameVisualizer _gameVisualizer)
         {
             visualizer = _gameVisualizer;
             entities = new List<Enemy>();
-            width = 1280;
-            height = 720;
+            width = _gameForm.Width;
+            height = _gameForm.Height;
+            deactivateForm = _gameForm.DeactivateForm;
             player = SpawnPlayer();
             visualizer.SetData(entities, player);
             random = new Random();
@@ -96,7 +101,7 @@ namespace Game
         private Player SpawnPlayer()
         {
             var _playerFigure = new Figure(Figure.FigureType.square, 25);
-            var _playerColliderFigure = new Figure(Properties.Resources.ship2, Figure.FigureType.square, 20);
+            var _playerColliderFigure = new Figure(Figure.FigureType.square, 20);
             var _player = new Player(width, height,
                 new Point((width - _playerFigure.Size) / 2, (height - _playerFigure.Size) / 2), 
                 _playerFigure, 
@@ -117,8 +122,8 @@ namespace Game
                 y = 0;
 
             var size = random.Next(25, 150);
-            var enemyFigure = new Figure(Properties.Resources._32x32, Figure.FigureType.circle, size);
-            var enemyColliderFigure = new Figure(Figure.FigureType.circle, Convert.ToInt32(float.Parse(size.ToString()) * 0.5f));
+            var enemyFigure = new Figure(Figure.FigureType.circle, size);
+            var enemyColliderFigure = new Figure(Figure.FigureType.circle, Convert.ToInt32(float.Parse(size.ToString()) * 0.7f));
             
             var dir = new Point(
                 x == width
@@ -135,7 +140,7 @@ namespace Game
         
         private void LoseGame()
         {
-            Form.ActiveForm.Dispose();
+            deactivateForm();
         }
     }
 }

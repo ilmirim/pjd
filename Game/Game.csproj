@@ -65,6 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enemy.cs" />
+    <Compile Include="Enter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Enter.Designer.cs">
+      <DependentUpon>Enter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="Form1.cs">
@@ -91,6 +97,9 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Enter.resx">
+      <DependentUpon>Enter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

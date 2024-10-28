@@ -20,6 +20,9 @@ namespace Game
         private int i;
         private Dictionary<Point, Figure> entitiesInfo;
         private Graphics graphics;
+        private Image asteroid;
+        private Image ship;
+
         public PictureBox background => pictureBox1;
 
         public GameForm(Form _menuForm)
@@ -35,6 +38,8 @@ namespace Game
             menuForm = _menuForm;
             graphics = pictureBox1.CreateGraphics();
             DoubleBuffered = true;
+            asteroid = Properties.Resources._64x64;
+            ship = Properties.Resources.ship2;
         }
 
         //Прогрузка объектов и сущностей при созданит сцены
@@ -47,40 +52,24 @@ namespace Game
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.W)
-            {
                 directionVector.Y = -1;
-            }
             if (e.KeyCode == Keys.D)
-            {
                 directionVector.X = 1;
-            }
             if (e.KeyCode == Keys.S)
-            {
                 directionVector.Y = 1;
-            }
             if (e.KeyCode == Keys.A)
-            {
                 directionVector.X = -1;
-            }
         }
         private void GameForm_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.W)
-            {
                 directionVector.Y = 0;
-            }
             if (e.KeyCode == Keys.D)
-            {
                 directionVector.X = 0;
-            }
             if (e.KeyCode == Keys.S)
-            {
                 directionVector.Y = 0;
-            }
             if (e.KeyCode == Keys.A)
-            {
                 directionVector.X = 0;
-            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -123,18 +112,23 @@ namespace Game
             Graphics graphics = Graphics.FromImage(bmp);
 
             var rect = new Rectangle(entitiesInfo.ElementAt(0).Key.X, entitiesInfo.ElementAt(0).Key.Y, entitiesInfo.ElementAt(0).Value.Size, entitiesInfo.ElementAt(0).Value.Size);
-            graphics.DrawImage(entitiesInfo.ElementAt(0).Value.Image, rect);
+            graphics.DrawImage(ship, rect);
             var i = -1;
             foreach (var enemy in entitiesInfo)
             {
                 i++;
                 if (i == 0) continue;
                 var rectEnemy = new Rectangle(enemy.Key.X, enemy.Key.Y, enemy.Value.Size, enemy.Value.Size);
-                graphics.DrawImage(enemy.Value.Image, rectEnemy);
+                graphics.DrawImage(asteroid, rectEnemy);
             }
 
             pictureBox1.Image = bmp;
             Refresh();
+        }
+
+        public void DeactivateForm()
+        {
+
         }
     }
 }

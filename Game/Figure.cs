@@ -17,8 +17,6 @@ namespace Game
         private FigureType type;
         private int size;
         public FigureType Type => type;
-        private Image image;
-        public Image Image => image;
         public int Size
         {
             get => size;
@@ -37,12 +35,6 @@ namespace Game
         {
             size = 25;
             type = FigureType.square;
-        }
-        public Figure(Image _image, FigureType _type = FigureType.square, int _size = 25)
-        {
-            image = _image;
-            size = _size;
-            type = _type;
         }
         public Figure()
         {

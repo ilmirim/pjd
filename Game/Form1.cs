@@ -24,7 +24,8 @@ namespace Game
             label5.BackColor = Color.Transparent;
             label6.BackColor = Color.Transparent;
             saveSystem = new SaveSystem("pjd Project");
-            
+            Enter enter = new Enter();
+            enter.ShowDialog();
         }
         private void Play()
         {
