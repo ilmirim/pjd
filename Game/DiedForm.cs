@@ -14,8 +14,8 @@ namespace Game
     public partial class DiedForm : Form
     {
         private Graphics graphics;
-        private GameForm GameForm;
         private int i;
+        private GameForm gameForm;
         public DiedForm()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace Game
         private void DiedForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape) { Close(); }
-            if (e.KeyCode == Keys.Space) {}
+            if (e.KeyCode == Keys.Space) { gameForm.Show(); }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -48,5 +48,6 @@ namespace Game
             pictureBox1.Refresh();  
 
         }
+
     }
 }

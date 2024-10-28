@@ -10,6 +10,7 @@ namespace Game
     public class MapSystem
     {
         Form game;
+        Reg Registrate;
         public MapSystem()
         {
             game = Form.ActiveForm;

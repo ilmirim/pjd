@@ -16,7 +16,10 @@ namespace Game
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Reg());
             Application.Run(new Form1());
+            
+            
         }
     }
 }
