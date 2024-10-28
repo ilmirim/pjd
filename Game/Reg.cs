@@ -23,12 +23,12 @@ namespace Game
             if (textBox_Name.Text.Length == 0)
             {
                 textBox_Name.Text = "Ввели некорректное имя";
+                return;
             }
             if (textBox_Login.Text.Length == 0)
             {
                 textBox_Login.Text = "Логин должен состоять из 12 символов";
             }
-            if ()
 
         }
     }
