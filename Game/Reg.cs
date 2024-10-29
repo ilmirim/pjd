@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace Game
 {
     public partial class Reg : Form
     {
+        DateTime temp;
+
         public Reg()
         {
             InitializeComponent();
@@ -23,13 +26,14 @@ namespace Game
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             if (textBox_Name.Text.Length == 0)
             {
                 label_err.Text = "Введите имя!";
                 return;
             }
 
-            Regex fullNameRegex = new Regex(@"^[А-ЯЁ][а-яё]|[A-Z][a-z]+ [А-ЯЁ][а-яё]|[A-Z][a-z]+ [А-ЯЁ][а-яё]|[A-Z][a-z]+$");
+            Regex fullNameRegex = new Regex(@"^(([А-ЯЁ][а-яё]+)|([A-Z][a-z]+))\s(([А-ЯЁ][а-яё]+)|([A-Z][a-z]+))\s(([А-ЯЁ][а-яё]+)|([A-Z][a-z]+))$");
             Match match = fullNameRegex.Match(textBox_Name.Text);
             if (!match.Success)
             {
@@ -61,31 +65,47 @@ namespace Game
                 return;
             }
 
-            Regex mailRegex = new Regex(@"\w+@\w.\w");
+            // mail gmail yandex
+            // ru com
+            Regex mailRegex = new Regex(@"\w+@(mail\.ru|gmail\.com|yandex\.ru)$");
             match = mailRegex.Match(textBox_Mail.Text);
-            if(!match.Success) 
+            if (!match.Success)
             {
                 label_err.Text = "Неправильный формат почты!";
                 return;
             }
 
-            Regex telephoneRegex = new Regex(@"[8]{1}\d{10}");
+            Regex telephoneRegex = new Regex(@"^[8]{1}\d{10}$");
             match = telephoneRegex.Match(textBox_Telephone.Text);
-            if(!match.Success) 
+            if (!match.Success)
             {
                 label_err.Text = "Неправильный формат телефона!";
                 return;
             }
-            
-            Regex dateRegex = new Regex(@"([012]\d|30|31).(0\d|10|11|12).[1|2][0|9]\d{2}$");
+
+            // Проверка
+            Regex dateRegex = new Regex(@"([012]\d|30|31)\.(0\d|10|11|12)\.([1|2][0|9]\d{2})$");
             match = dateRegex.Match(textBox_Date.Text);
-            if(!match.Success)
+
+            if (match.Success)
+            {
+                var dateParsed = DateTime.TryParse(textBox_Date.Text, out var date);
+
+                if (date > DateTime.Today || !dateParsed)
+                {
+                    label_err.Text = "Неправильный формат даты!";
+                    return;
+                }
+            }
+            else
             {
                 label_err.Text = "Неправильный формат даты!";
                 return;
             }
 
-            
+
+
+
             label_err.Text = "";
             //дописать запись данных в файл
             Close();
