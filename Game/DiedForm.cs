@@ -40,7 +40,7 @@ namespace Game
         {
             i++;
             pictureBox1.Image = Properties.Resources.ship2;
-            if (i > 10)
+            if (i%10==0 )
             {
                 pictureBox1.Image = Properties.Resources._64x64;
             }

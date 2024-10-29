@@ -68,16 +68,16 @@
             this.groupBox1.Size = new System.Drawing.Size(294, 432);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Login";
+            this.groupBox1.Text = "SIGN UP";
             // 
             // label_err
             // 
             this.label_err.AutoSize = true;
-            this.label_err.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_err.Font = new System.Drawing.Font("Harlow Solid Italic", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_err.ForeColor = System.Drawing.Color.Red;
             this.label_err.Location = new System.Drawing.Point(6, 369);
             this.label_err.Name = "label_err";
-            this.label_err.Size = new System.Drawing.Size(41, 13);
+            this.label_err.Size = new System.Drawing.Size(38, 14);
             this.label_err.TabIndex = 5;
             this.label_err.Text = "label1";
             // 
@@ -212,11 +212,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Tan;
+            this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(371, 456);
             this.Controls.Add(this.label_Akk);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Reg";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reg";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -29,11 +29,11 @@ namespace Game
                 return;
             }
 
-            Regex fullNameRegex = new Regex(@"^[А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+$");
+            Regex fullNameRegex = new Regex(@"^[А-ЯЁ][а-яё]|[A-Z][a-z]+ [А-ЯЁ][а-яё]|[A-Z][a-z]+ [А-ЯЁ][а-яё]|[A-Z][a-z]+$");
             Match match = fullNameRegex.Match(textBox_Name.Text);
             if (!match.Success)
             {
-                label_err.Text = "Введите полное имя!";
+                label_err.Text = "Неверный формат имени!";
                 return;
             }
 
@@ -85,6 +85,7 @@ namespace Game
                 return;
             }
 
+            
             label_err.Text = "";
             //дописать запись данных в файл
             Close();
@@ -92,7 +93,6 @@ namespace Game
 
         private void labelAkk_Click(object sender, EventArgs e)
         {
-            
             var signInForm = new SignInForm();
             signInForm.ShowDialog();
             Close();
