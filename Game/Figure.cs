@@ -21,7 +21,7 @@ namespace Game
         public Figure(FigureType _type = FigureType.square, int _size = 25) 
         {
             size = _size;
-            type = _type;  
+            type = _type;  //
         }
     }
 }
